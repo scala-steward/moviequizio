@@ -1,0 +1,89 @@
+@font-face {
+  font-family: 'Luckiest Guy';
+  src: url('LuckiestGuy-Regular.ttf') format('truetype');
+}
+
+h1 {
+  font-family: 'Luckiest Guy', serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  flex-direction: column;
+}
+
+h1 {
+  font-family: 'Luckiest Guy', serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 5rem;
+  text-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.2),
+    4px 4px 8px rgba(0, 0, 0, 0.15),
+    6px 6px 12px rgba(0, 0, 0, 0.1);
+    8px 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+
+.pushable {
+  /*background: hsl(340deg 100% 32%);*/
+  background: hsl(85deg, 100%, 28%) ;
+  border-radius: 12px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+}
+
+.pushable:active .front {
+  transform: translateY(-2px);
+}
+
+.pushable:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.pushable {
+  transition: filter 600ms;
+  user-select: none;
+}
+
+.pushable:hover {
+  transition: filter 250ms;
+  filter: brightness(105%);
+}
+
+.pushable {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.shadow {
+  filter: blur(4px);
+}
+
+.edge {
+  background: linear-gradient(
+  to left,
+  hsl(85deg 100% 16%) 0%,
+  hsl(85deg 100% 32%) 8%,
+  hsl(85deg 100% 32%) 92%,
+  hsl(85deg 100% 16%) 100%
+  );
+}
+
+.front {
+  display: block;
+  padding: 12px 42px;
+  border-radius: 12px;
+  font-size: 1.25rem;
+  background: hsl(90deg 100% 38%);
+  color: white;
+  transform: translateY(-6px);
+}
