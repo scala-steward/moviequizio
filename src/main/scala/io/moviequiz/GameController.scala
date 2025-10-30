@@ -7,6 +7,8 @@ case class Movie(slug: String, name: String)
 
 class GameController(ui: UI):
 
+  private val cdn = "https://cdn.moviequiz.io"
+
   private val maxNbOfMoviesPerGame = 3
 
   private val nbOfScreenshotsPerMovie = 3
@@ -66,7 +68,8 @@ class GameController(ui: UI):
   private def displayMovie(movieIndex: Int): Unit =
     val movie = movies(movieIndex)
     val screenshotNumber = rand.nextInt(nbOfScreenshotsPerMovie) + 1
-    ui.renderScreenshot(movie.slug, screenshotNumber)
+    val url = s"$cdn/images/${movie.slug}/screenshot$screenshotNumber.jpg"
+    ui.renderScreenshot(url)
 
   private def guess(movieName: String): Unit =
     if movieName == movies(score).name then winRound()

@@ -57,8 +57,8 @@ class UI:
     score.textContent = "Score: 0"
     document.body.appendChild(score)
 
-  def renderScreenshot(movieSlug: String, screenshotNumber: Int): Unit =
-    document.body.style.backgroundImage = s"url('images/$movieSlug/screenshot$screenshotNumber.jpg')"
+  def renderScreenshot(url: String): Unit =
+    document.body.style.backgroundImage = s"url('$url')"
     document.body.style.backgroundPosition = "center"
     document.body.style.backgroundSize = "cover"
     document.body.style.backgroundRepeat = "no-repeat"
@@ -206,7 +206,7 @@ class UI:
     document.body.appendChild(container)
 
   def renderVictoryScreen(finalScore: Int, numberOfDaysSinceInception: Int): Unit =
-    renderEndScreen("YOU WIN", finalScore, numberOfDaysSinceInception)
+    renderEndScreen("YOU WON", finalScore, numberOfDaysSinceInception)
 
   def renderFailScreen(finalScore: Int, numberOfDaysSinceInception: Int): Unit =
     renderEndScreen("GAME OVER", finalScore, numberOfDaysSinceInception)
