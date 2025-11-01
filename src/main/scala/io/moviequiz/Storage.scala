@@ -4,12 +4,12 @@ import org.scalajs.dom.window.localStorage
 
 case class Game(gameDayIndex: Int, score: Int, isFinished: Boolean)
 
-object Storage:
+class Storage:
 
   private enum Key:
     case GameDayId, Score, IsFinished
 
-  def loadGame(gameDayIndex: Int): Option[Game] =
+  def getGame(gameDayIndex: Int): Option[Game] =
     val gameDayIndex = getIntItem(Key.GameDayId)
     val score = getIntItem(Key.Score)
     val isFinished = getBoolItem(Key.IsFinished)

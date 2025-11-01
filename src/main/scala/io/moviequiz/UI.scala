@@ -45,17 +45,17 @@ class UI:
         onStart()
     )
 
-  def renderTitleAndScore(): Unit =
+  def renderTitleAndScore(score: Int): Unit =
     val title = document.createElement("h1").asInstanceOf[html.Heading]
     title.textContent = "MovieQuiz.io"
     title.classList.add("header")
     document.body.appendChild(title)
 
-    val score = document.createElement("h1").asInstanceOf[html.Heading]
-    score.id = "score"
-    score.classList.add("score")
-    score.textContent = "Score: 0"
-    document.body.appendChild(score)
+    val scoreHeading = document.createElement("h1").asInstanceOf[html.Heading]
+    scoreHeading.id = "score"
+    scoreHeading.classList.add("score")
+    scoreHeading.textContent = s"Score: $score"
+    document.body.appendChild(scoreHeading)
 
   def renderScreenshot(url: String): Unit =
     document.body.style.backgroundImage = s"url('$url')"
@@ -171,7 +171,7 @@ class UI:
     val clearButton = document.getElementsByTagName("span").head.asInstanceOf[html.Span]
     clearInput(input, clearButton)
 
-  private def renderEndScreen(titleText: String, finalScore: Int, numberOfDaysSinceInception: Int): Unit =
+  private def renderEndScreen(titleText: String, finalScore: Int, gameDayIndex: Int): Unit =
     document.body.innerHTML = ""
 
     val container = document.createElement("div")
@@ -188,7 +188,7 @@ class UI:
 
     val shareButton = createButton("Share", "Share")
     container.append(shareButton)
-    val shareText = s"MovieQuiz.io #$numberOfDaysSinceInception score: $finalScore"
+    val shareText = s"MovieQuiz.io #$gameDayIndex score: $finalScore"
     shareButton.addEventListener(
       "click",
       (_: Event) =>
@@ -205,8 +205,8 @@ class UI:
 
     document.body.appendChild(container)
 
-  def renderVictoryScreen(finalScore: Int, numberOfDaysSinceInception: Int): Unit =
-    renderEndScreen("YOU WON", finalScore, numberOfDaysSinceInception)
+  def renderVictoryScreen(finalScore: Int, gameDayIndex: Int): Unit =
+    renderEndScreen("YOU WON", finalScore, gameDayIndex)
 
-  def renderFailScreen(finalScore: Int, numberOfDaysSinceInception: Int): Unit =
-    renderEndScreen("GAME OVER", finalScore, numberOfDaysSinceInception)
+  def renderFailScreen(finalScore: Int, gameDayIndex: Int): Unit =
+    renderEndScreen("GAME OVER", finalScore, gameDayIndex)
