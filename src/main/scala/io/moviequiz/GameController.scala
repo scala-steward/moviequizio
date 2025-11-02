@@ -1,26 +1,14 @@
 package io.moviequiz
 
-import scala.scalajs.js.Date
 import scala.util.Random
 
-case class Movie(slug: String, name: String)
-
-class GameController(now: Date, conf: Config, ui: UI, storage: Storage):
-
-  private val moviesOrdered = List(
-    Movie("bound-(1996)", "Bound (1996)"),
-    Movie("le-roi-lion-(1994)", "Le Roi Lion (1994)"),
-    Movie("never-back-down-(2008)", "Never Back Down (2008)"),
-    Movie("the-guest-(2014)", "The Guest (2014)")
-  )
-
-  private val gameDayIndex: Int =
-    val rootDate = new Date("2025-10-22")
-    ((now.getTime() - rootDate.getTime()) / (1000 * 60 * 60 * 24)).toInt
+class GameController(conf: Config, movies: Movies, gameDayIndex: Int, ui: UI, storage: Storage):
 
   private val rand = Random(gameDayIndex)
 
-  private val movies = rand.shuffle(moviesOrdered)
+  private val movieSlugsShuffled = rand.shuffle(movies.slugs)
+
+  private val movieTitles = movies.slugsToTitles.values.flatten.toSeq
 
   private var score = 0
 
@@ -50,21 +38,20 @@ class GameController(now: Date, conf: Config, ui: UI, storage: Storage):
       rand.nextInt()
       displayMovie(score)
       ui.renderTitleAndScore(score)
-      ui.renderGuessBox(movies.map(_.name))
+      ui.renderGuessBox(movieTitles)
 
   private def startGame(): Unit =
     ui.renderTitleAndScore(score)
     displayMovie(score)
-    ui.renderGuessBox(movies.map(_.name))
+    ui.renderGuessBox(movieTitles)
 
   private def displayMovie(movieIndex: Int): Unit =
-    val movie = movies(movieIndex)
     val screenshotNumber = rand.nextInt(conf.nbOfScreenshotsPerMovie) + 1
-    val url = s"${conf.cdn}/images/${movie.slug}/screenshot$screenshotNumber.jpg"
+    val url = s"${conf.cdn}/images/${movieSlugsShuffled(movieIndex)}/$screenshotNumber.avif"
     ui.renderScreenshot(url)
 
   private def guess(movieName: String): Unit =
-    if movieName == movies(score).name then winRound()
+    if movies.slugsToTitles(movieSlugsShuffled(score)).contains(movieName) then winRound()
     else lose()
 
   private def isVictory = score == conf.maxNbOfMoviesPerGame
@@ -85,5 +72,5 @@ class GameController(now: Date, conf: Config, ui: UI, storage: Storage):
     storage.saveGame(Game(gameDayIndex, score, true))
 
 object GameController:
-  def apply(now: Date, conf: Config, ui: UI, storage: Storage): GameController =
-    new GameController(now, conf, ui, storage)
+  def apply(conf: Config, movies: Movies, gameDayIndex: Int, ui: UI, storage: Storage): GameController =
+    new GameController(conf, movies, gameDayIndex, ui, storage)
