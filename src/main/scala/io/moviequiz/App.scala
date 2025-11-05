@@ -11,7 +11,7 @@ import scala.scalajs.js.Date
 object App:
 
   private val gameDayIndex: Int =
-    val rootDate = new Date("2025-10-22")
+    val rootDate = new Date(2025, 9, 22)
     ((new Date().getTime() - rootDate.getTime()) / (1000 * 60 * 60 * 24)).toInt
 
   def main(args: Array[String]): Unit =

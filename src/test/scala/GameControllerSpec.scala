@@ -48,8 +48,8 @@ class GameControllerSpec extends AnyFunSpec with GivenWhenThen with MockFactory:
   private val storage = mock[Storage]
 
   private val gameDayIndex: Int =
-    val rootDate = new Date("2025-10-22")
-    ((new Date("2025-11-01").getTime() - rootDate.getTime()) / (1000 * 60 * 60 * 24)).toInt
+    val rootDate = new Date(2025, 9, 22)
+    ((new Date(2025, 10, 1).getTime() - rootDate.getTime()) / (1000 * 60 * 60 * 24)).toInt
 
   describe("init") {
     it("should register the ui.onStart callback as expected") {
