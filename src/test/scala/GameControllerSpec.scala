@@ -26,7 +26,7 @@ class GameControllerSpec extends AnyFunSpec with GivenWhenThen with MockFactory:
     slugsToTitles = Map(
       "a-fistful-of-dollar-(1964)" -> Set("A Fistful of Dollars (1964)", "Per un pugno di dollari"),
       "for-a-few-dollars-more-(1965))" -> Set("For A Few Dollars More (1965)", "Per qualche dollaro in più"),
-      "the-good-the-bad-and-the-ugly-(1966)" -> Set("The Good, the Bad and the Ugly (1996)"),
+      "the-good-the-bad-and-the-ugly-(1966)" -> Set("The Good, the Bad and the Ugly (1966)"),
       "they-call-me-trinity-(1970)" -> Set("They Call Me Trinity (1970)", "Lo chiamavano Trinità..."),
       "my-name-is-nobody-(1973)" -> Set("My Name Is Nobody (1973)"),
       "babe-(1995)" -> Set("Babe (1995)"),

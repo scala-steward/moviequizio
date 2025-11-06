@@ -261,6 +261,7 @@ h1 {
     font-size: 2rem;
   }
 }
+
 @media (max-width: 768px) and (orientation: landscape) {
   .end-container {
     height: 80vh;
