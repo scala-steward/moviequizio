@@ -28,5 +28,9 @@ jobs:
           sbt-runner-version: 1.11.7
       - name: Check Scala linting
         run: sbt scalafmtCheck
+      - name: Install prettier
+        run: yarn install
+      - name: Check linting with prettier
+        run: ./node_modules/.bin/prettier --check .
       - name: Run tests
         run: sbt test
