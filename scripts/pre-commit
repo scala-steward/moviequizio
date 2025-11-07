@@ -22,7 +22,7 @@ check_tools ./node_modules/.bin/prettier scalafmt
 
 echo_blue "[Prettier] Checking formatting..."
 
-files=$(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g' | grep -E "\.(html|css|ymlmd)$")
+files=$(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g' | grep -E "\.(html|css|yml|md)$")
 changed_files=0
 
 for file in $files; do
