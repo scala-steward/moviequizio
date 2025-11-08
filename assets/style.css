@@ -192,7 +192,6 @@ h1 {
 
 .pushable:hover {
   transition: filter 250ms;
-  filter: brightness(105%);
 }
 
 .shadow {
@@ -217,6 +216,10 @@ h1 {
   background: hsl(90deg 100% 38%);
   color: white;
   transform: translateY(-6px);
+}
+
+.front:hover {
+  background: #6dc811;
 }
 
 .end-container {
