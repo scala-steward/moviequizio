@@ -1,4 +1,4 @@
-name: Test
+name: Main
 
 on:
   push:
@@ -10,9 +10,11 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  build-test-and-publish:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      deployments: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -34,3 +36,11 @@ jobs:
         run: ./node_modules/.bin/prettier --check .
       - name: Run tests
         run: sbt test
+      - name: Build public directory
+        run: sbt buildPublic
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy public --project-name=moviequiz

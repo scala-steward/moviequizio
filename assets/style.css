@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'luckiest_guyregular';
   src:
-    url('luckiestguy-regular-webfont.woff2') format('woff2'),
-    url('luckiestguy-regular-webfont.woff') format('woff');
+    url('fonts/luckiestguy-regular-webfont.woff2') format('woff2'),
+    url('fonts/luckiestguy-regular-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
