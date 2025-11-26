@@ -1,0 +1,21 @@
+name: Update Dependency Graph
+
+on:
+  push:
+    branches: ['master']
+
+permissions:
+  contents: write
+
+jobs:
+  update-dependency-graph:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      - name: Setup SBT
+        uses: sbt/setup-sbt@v1
+        with:
+          sbt-runner-version: 1.11.7
+      - name: Update dependency graph
+        uses: scalacenter/sbt-dependency-submission@v3
