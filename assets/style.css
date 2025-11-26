@@ -265,7 +265,13 @@ h1 {
   }
 }
 
-@media (max-width: 768px) and (orientation: landscape) {
+@media (max-height: 760px) {
+  .end-container {
+    height: 60vh;
+  }
+}
+
+@media (max-height: 500px) {
   .end-container {
     height: 80vh;
   }
