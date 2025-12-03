@@ -136,23 +136,36 @@ class UI:
         renderList()
     )
 
+    def highlightNextItem(): Unit =
+      val items = suggestions.getElementsByTagName("li")
+      if indexHighlighted.isDefined then
+        items(indexHighlighted.get).classList.remove("highlighted")
+        indexHighlighted = Some((indexHighlighted.get + 1) % filtered.size)
+      else indexHighlighted = Some(0)
+      items(indexHighlighted.get).classList.add("highlighted")
+
+    def highlightPreviousItem(): Unit =
+      val items = suggestions.getElementsByTagName("li")
+      if indexHighlighted.isDefined then
+        items(indexHighlighted.get).classList.remove("highlighted")
+        indexHighlighted = Some((indexHighlighted.get - 1 + filtered.size) % filtered.size)
+      else indexHighlighted = Some(0)
+      items(indexHighlighted.get).classList.add("highlighted")
+
     input.addEventListener(
       "keydown",
       (e: KeyboardEvent) =>
-        if e.keyCode == KeyCode.Enter && filtered.nonEmpty then
-          e.preventDefault()
-          if indexHighlighted.isDefined then selectValue(filtered(indexHighlighted.get))
-          else selectValue(filtered.head)
-        if e.keyCode == KeyCode.Tab && filtered.nonEmpty then
-          e.preventDefault()
-          val items = suggestions.getElementsByTagName("li")
-          if indexHighlighted.isDefined then
-            items(indexHighlighted.get).classList.remove("highlighted")
-            if e.shiftKey then
-              indexHighlighted = Some((indexHighlighted.get - 1 + filtered.size) % filtered.size)
-            else indexHighlighted = Some((indexHighlighted.get + 1) % filtered.size)
-          else indexHighlighted = Some(0)
-          items(indexHighlighted.get).classList.add("highlighted")
+        if filtered.nonEmpty then
+          if e.keyCode == KeyCode.Enter then
+            e.preventDefault()
+            if indexHighlighted.isDefined then selectValue(filtered(indexHighlighted.get))
+            else selectValue(filtered.head)
+          else if (e.keyCode == KeyCode.Tab && e.shiftKey) || e.keyCode == KeyCode.Up then
+            e.preventDefault()
+            highlightPreviousItem()
+          else if e.keyCode == KeyCode.Tab || e.keyCode == KeyCode.Down then
+            e.preventDefault()
+            highlightNextItem()
     )
 
     input.addEventListener(
