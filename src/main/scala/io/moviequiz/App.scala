@@ -22,12 +22,16 @@ object App:
       (e: dom.Event) =>
         val conf = Config()
 
-        getMovies(s"${conf.cdn}/movies.json").map(movies =>
-          val ui = UI()
-          val storage = Storage()
-          val gameController = GameController(conf, movies, gameDayIndex, ui, storage)
-          gameController.init()
-        )
+        getMovies(s"${conf.cdn}/movies.json")
+          .map(movies =>
+            val ui = UI()
+            val storage = Storage()
+            val gameController = GameController(conf, movies, gameDayIndex, ui, storage)
+            gameController.init()
+          )
+          .recover { case t: Throwable =>
+            println("Something went wrong :(")
+          }
     )
 
   private def getMovies(url: String): Future[Movies] =

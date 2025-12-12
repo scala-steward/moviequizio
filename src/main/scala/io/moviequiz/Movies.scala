@@ -3,7 +3,11 @@ package io.moviequiz
 import scala.scalajs.js
 import scala.scalajs.js.JSON
 
-case class Movies(slugs: Seq[String], slugsToTitles: Map[String, Set[String]])
+case class Movies(
+    slugs: Seq[String],
+    slugsToTitles: Map[String, Set[String]],
+    slugsToPopularity: Map[String, Int]
+)
 
 object Movies:
   def fromJsonText(text: String): Movies =
@@ -18,4 +22,8 @@ object Movies:
       .map(movie => movie.slug.asInstanceOf[String] -> movie.titles.asInstanceOf[js.Array[String]].toSet)
       .toMap
 
-    Movies(slugs, slugsToTitles)
+    val slugsToPopularity = array
+      .map(movie => movie.slug.asInstanceOf[String] -> movie.popularity.asInstanceOf[Int])
+      .toMap
+
+    Movies(slugs, slugsToTitles, slugsToPopularity)
