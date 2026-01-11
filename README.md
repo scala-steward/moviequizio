@@ -41,7 +41,7 @@ sbt fullLinkJS
 
 ### Serve
 
-MovieQuiz.io requires no backend server and can be hosted as a static website. Simply provide [index.html](./index.html), [favicon.ico](./favicon.ico), the [assets](./assets) directory and the generated JS file (typically in `target/scala-3.7.3/moviequiz-io-opt/main.js`). The path in [index.html](./index.html) may have to be adapted.
+MovieQuiz.io requires no backend server and can be hosted as a static website. Simply provide [index.html](./index.html), [favicon.ico](./favicon.ico), the [assets](./assets) directory and the generated JS file (typically in `target/scala-X.X.X/moviequiz-io-opt/main.js`). The path in [index.html](./index.html) may have to be adapted.
 
 ### Continuous deployment
 
