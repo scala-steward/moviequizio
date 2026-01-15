@@ -10,9 +10,13 @@ import scala.scalajs.js.Date
 
 object App:
 
+  private def toLocalMidnight(date: Date): Date =
+    new Date(date.getFullYear.toInt, date.getMonth.toInt, date.getDate.toInt)
+
   private val gameDayIndex: Int =
-    val rootDate = new Date(2025, 9, 22)
-    ((new Date().getTime() - rootDate.getTime()) / (1000 * 60 * 60 * 24)).toInt
+    val rootDate = toLocalMidnight(new Date(2025, 9, 22))
+    val today = toLocalMidnight(new Date())
+    ((today.getTime() - rootDate.getTime()) / (1000 * 60 * 60 * 24)).toInt
 
   def main(args: Array[String]): Unit =
     println("Welcome to MovieQuiz.io!")
