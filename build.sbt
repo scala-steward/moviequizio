@@ -4,7 +4,7 @@ name := "MovieQuiz.io"
 scalaVersion := "3.8.2"
 scalaJSUseMainModuleInitializer := true
 libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "2.8.1"
-libraryDependencies += "org.scalatest" %%% "scalatest-funspec" % "3.2.19" % "test"
+libraryDependencies += "org.scalatest" %%% "scalatest-funspec" % "3.2.20" % "test"
 libraryDependencies += "org.scalamock" %%% "scalamock" % "7.5.5" % "test"
 
 Compile / fullLinkJS / scalaJSLinkerConfig ~= { _.withSourceMap(false) }
