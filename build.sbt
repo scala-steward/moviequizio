@@ -1,7 +1,7 @@
 enablePlugins(ScalaJSPlugin)
 
 name := "MovieQuiz.io"
-scalaVersion := "3.8.3"
+scalaVersion := "3.8.4"
 scalaJSUseMainModuleInitializer := true
 libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "2.8.1"
 libraryDependencies += "org.scalatest" %%% "scalatest-funspec" % "3.2.20" % "test"
