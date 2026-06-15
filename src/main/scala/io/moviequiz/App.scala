@@ -11,7 +11,7 @@ import scala.scalajs.js.Date
 object App:
 
   private def toLocalMidnight(date: Date): Date =
-    new Date(date.getFullYear.toInt, date.getMonth.toInt, date.getDate.toInt)
+    new Date(date.getFullYear().toInt, date.getMonth().toInt, date.getDate().toInt)
 
   private val gameDayIndex: Int =
     val rootDate = toLocalMidnight(new Date(2025, 9, 22))
